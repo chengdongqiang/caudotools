@@ -5,7 +5,7 @@ Tailed bacteriophages, also known as phages, belong to the class Caudoviricetes 
 
 Caudocog is developed based on OrthoFinder and other softwares, creating a comprehensive nucleotide sequence database for core Caudoviricetes orthologous groups. The resulting output, Caudoviricetes_aa2nt.fas, serves as the search database for caudoscan.
 
-Caudoscan is designed to identify phage contigs through nucleotide homologous searches and calculation of a window-based score following the Wilson score interval method. A caudoscan score of 0.3 serves as a judgement threshold. Contigs with a caudoscan score greater than 0.3are categorized as phage contigs. Simulations using error-prone long reads of 40 kb and 20 kb showed that the F1 score for caudoscan reached 0.95 and 0.90, respectively.
+Caudoscan is designed to identify phage contigs through nucleotide homologous searches and calculation of a window-based score following the Wilson score interval method. A caudoscan score of 0.3 serves as a judgement threshold. Contigs with a caudoscan score greater than 0.3 are categorized as phage contigs. Simulations using error-prone long reads of 40 kb and 20 kb showed that the F1 score for caudoscan reached 0.95 and 0.90, respectively.
 
 ### **Caudocog Prerequisites**
 The following software must be installed and added to the system’s PATH: prodigal, mash, orthofinder, hmmer, muscle, blastp (with the nr database available) and parallel. 
