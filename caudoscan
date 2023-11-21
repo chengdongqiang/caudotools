@@ -1,0 +1,62 @@
+#!/bin/bash
+#Dongqiang Cheng
+
+usage() { echo "Usage: $0 [-i <input contigs>] [-o <output directory>] [-t <threads>]" 1>&2; exit 1; }
+
+while getopts ":i:o:t:" a; do
+    case "${a}" in
+        i)
+            i=${OPTARG}
+            ;;
+        o)
+            o=${OPTARG}
+            ;;
+	t) 
+            t=${OPTARG}
+            ;; 
+        *)
+            usage
+            ;;
+    esac
+done
+shift $((OPTIND-1))
+
+if [ -z "${i}" ] || [ -z "${o}" ] || [ -z "${t}" ]; then
+    usage
+fi
+
+SPATH="$(dirname "$(readlink -f "$0")")"
+SRC="$SPATH"/src
+o=${o%/}
+
+if [[ -d ${o} ]]
+then
+	echo "\"${o}\" directory exists."
+	#exit;
+	#rm ${o}/temp/split*
+else
+	mkdir -p ${o}
+fi
+
+in=${i##*/}
+cp $i ${o}/${in}
+perl ${SRC}/my_onelineonefa.pl  ${o}/${in}
+perl ${SRC}/my_splitfas.pl  ${o}/${in}.oneline.fas ${o}
+
+ls ${o}/temp/c*.fas >${o}/temp/fas_list
+bash ${SRC}/my_check_undo.sh ${o}/temp/fas_list >${o}/temp/fas_list_undo
+
+#l=$(wc -l ${o}/temp/fas_list_undo | cut -f1 -d' ')
+#m=$((l / ${t}))
+#n=$((m + 1))
+#split -l ${n} ${o}/temp/fas_list_undo ${o}/temp/split
+#ls ${o}/temp/split* >${o}/temp/list
+#parallel -j${t} bash ${SRC}/my_subrun.sh ${SRC} {} 1 >${o}/temp.log 2>&1 :::: ${o}/temp/list
+
+bash ${SRC}/my_subrun.sh ${SRC} ${o}/temp/fas_list_undo ${t} >${o}/temp.log 2>&1
+
+cat ${SRC}/my_header ${o}/temp/*.cal >${o}/${in}.caudoscan.txt
+
+echo "caudoscan done!"
+
+

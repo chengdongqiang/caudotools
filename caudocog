@@ -1,0 +1,214 @@
+#!/usr/bin/bash
+#Dongqiang Cheng
+
+usage() { echo "Usage: $0 [-o <output directory>] [-t <threads>]" 1>&2; exit 1; }
+
+while getopts ":o:t:" a; do
+    case "${a}" in
+        o)
+            o=${OPTARG}
+            ;;
+	t) 
+            t=${OPTARG}
+            ;; 
+        *)
+            usage
+            ;;
+    esac
+done
+shift $((OPTIND-1))
+
+if [ -z "${o}" ] || [ -z "${t}" ]; then
+    usage
+fi
+
+SPATH="$(dirname "$(readlink -f "$0")")"
+SRC="$SPATH"/src
+o=${o%/}
+
+if [[ -d ${o} ]]
+then
+	echo "\"${o}\" directory exists."
+	exit;
+else
+	mkdir -p ${o}
+fi
+
+echo "Download Refseq viral genomic database ..."
+wget https://ftp.ncbi.nlm.nih.gov/refseq/release/viral/viral.1.1.genomic.fna.gz -O ${o}/viral.1.1.genomic.fna.gz >/dev/null 2>&1
+gunzip -c ${o}/viral.1.1.genomic.fna.gz > ${o}/viral.1.1.genomic.fna
+rm ${o}/viral.1.1.genomic.fna.gz
+grep "^>" ${o}/viral.1.1.genomic.fna >${o}/allid
+perl ${SRC}/my_cleanid.pl ${o}/allid
+
+echo "Download accession2taxid database ..."
+wget https://ftp.ncbi.nlm.nih.gov/pub/taxonomy/accession2taxid/nucl_gb.accession2taxid.gz -O ${o}/nucl_gb.accession2taxid.gz >/dev/null 2>&1  
+wget https://ftp.ncbi.nlm.nih.gov/pub/taxonomy/accession2taxid/nucl_wgs.accession2taxid.gz -O ${o}/nucl_wgs.accession2taxid.gz >/dev/null 2>&1
+gunzip -c ${o}/nucl_gb.accession2taxid.gz > ${o}/nucl_gb.accession2taxid
+rm ${o}/nucl_gb.accession2taxid.gz
+gunzip -c ${o}/nucl_wgs.accession2taxid.gz > ${o}/nucl_wgs.accession2taxid
+rm ${o}/nucl_wgs.accession2taxid.gz
+cat ${o}/nucl_gb.accession2taxid ${o}/nucl_wgs.accession2taxid >${o}/nucl_gb_wgs.accession2taxid
+rm ${o}/nucl_gb.accession2taxid
+rm ${o}/nucl_wgs.accession2taxid
+
+echo "Prepare Caudoviricetes genome ..."
+perl ${SRC}/my_fastestvlookup.pl ${o}/allid.cleanid ${o}/nucl_gb_wgs.accession2taxid
+bash ${SRC}/my_get_taxid.sh ${o}
+perl ${SRC}/my_seqid_taxid_rank.pl ${o}/allid.cleanid.vlookuptaxid.rank ${o}/allid.cleanid.vlookuptaxid ${o}/seqid_taxid_rank.list
+perl ${SRC}/my_pick_Caudoviricetes.pl ${o}/seqid_taxid_rank.list
+perl ${SRC}/my_pickup_fas.pl ${o}/seqid_taxid_rank.list.pick_Caudoviricetes.list ${o}/viral.1.1.genomic.fna
+mv ${o}/seqid_taxid_rank.list.pick_Caudoviricetes.list.fas ${o}/refseq_Caudoviricetes_genome.fas
+if [[ -s ${o}/refseq_Caudoviricetes_genome.fas ]] 
+then 
+        echo "Prepare Caudoviricetes genome - OK!"
+fi
+rm ${o}/allid
+rm ${o}/allid.cleanid
+rm ${o}/allid.cleanid.vlookuptaxid
+rm ${o}/allid.cleanid.vlookuptaxid.rank
+rm ${o}/nucl_gb_wgs.accession2taxid
+rm ${o}/seqid_taxid_rank.list
+rm ${o}/seqid_taxid_rank.list.pick_Caudoviricetes.list
+rm ${o}/viral.1.1.genomic.fna
+
+echo "Prepare far-related representative Caudoviricetes genome ..."
+mkdir -p ${o}/eachfa
+perl ${SRC}/my_eachfa.pl ${o}/refseq_Caudoviricetes_genome.fas ${o}/eachfa
+mkdir -p ${o}/newid
+bash ${SRC}/my_rename.sh ${o}
+n=$(ls ${o}/newid/*.fas | wc -l | cut -f1 -d' ')
+bash ${SRC}/my_mash_cmd.sh ${o} ${n}
+
+l=$(wc -l ${o}/mash_all.cmd | cut -f1 -d' ')
+m=$((l / ${t}))
+n=$((m + 1))
+split -l ${n} ${o}/mash_all.cmd ${o}/split
+ls ${o}/split* >${o}/list
+parallel -j${t} bash {} ">" {}.out >/dev/null 2>&1 :::: ${o}/list
+cat ${o}/split*.out >${o}/all_mash_dist.output
+perl ${SRC}/my_get_dist.pl ${o}/all_mash_dist.output
+n=$(ls ${o}/newid/*.fas | wc -l | cut -f1 -d' ')
+perl ${SRC}/my_check_mash.pl ${o}/all_mash_dist.output.out ${n}
+Rscript --no-save ${SRC}/my_cluster.R ${o}
+perl ${SRC}/my_combine_cluster.pl ${o}/all_mash_dist.output.out.out.clustersname ${o}/all_mash_dist.output.out.out.clusters ${o}/all.cluster
+
+n=$(ls ${o}/newid/*.fas | wc -l | cut -f1 -d' ')
+echo "">${o}/all.n50
+for i in $(seq 1 1 ${n})
+do
+	bash ${SRC}/my_get_n50.sh ${o}/newid/${i}.fas ${SRC} >>${o}/all.n50
+done
+
+perl ${SRC}/my_get_cluster_representative.pl ${o}
+bash ${o}/all.cluster_representative.cmd
+cat ${o}/representative/*.fas >${o}/representative_Caudoviricetes.fas
+if [[ -s ${o}/representative_Caudoviricetes.fas ]]
+then
+        echo "Prepare far-related representative Caudoviricetes genome - OK!"
+fi
+rm -R ${o}/eachfa || true
+rm -R ${o}/newid || true
+rm ${o}/split* || true
+rm ${o}/list || true
+rm ${o}/all_mash_dist.output* || true
+rm ${o}/all.cluster* || true
+rm ${o}/all.n50 || true
+rm ${o}/id_list || true
+rm ${o}/mash_all.cmd || true
+
+echo "Using orthofinder to get Caudoviricetes orthologs ..."
+mkdir -p ${o}/prodigal
+for i in ${o}/representative/*.fas
+do
+	i=${i##*/}
+	prodigal -i ${o}/representative/$i -a ${o}/prodigal/$i.prodigal.fasta -p meta >/dev/null 2>&1
+done
+
+mkdir -p ${o}/prodigal_check
+for i in ${o}/prodigal/*.fasta
+do
+	i=${i##*/}
+	perl ${SRC}/my_onelineonefa.pl ${o}/prodigal/$i
+	perl ${SRC}/my_filterfaslength.pl  ${o}/prodigal/$i.oneline.fas 150 2000
+	if [ -s ${o}/prodigal/$i.oneline.fas.filter150_2000.fasta ]
+	then
+		cp ${o}/prodigal/$i.oneline.fas.filter150_2000.fasta ${o}/prodigal_check/$i.ok.fasta
+	fi
+done
+orthofinder -S diamond_ultra_sens -f ${o}/prodigal_check -t ${t} -o ${o}/orthofinder -n out -og --fewer-files >${o}/orthofinder.temp1.log &
+pid=$!
+st=$((480/${t}))
+sleep ${st}h
+kill -9 $pid
+orthofinder -S diamond_ultra_sens -t ${t} -b ${o}/orthofinder/Results_out/WorkingDirectory -n og -os -M msa --fewer-files >${o}/orthofinder.temp2.log
+cp -R ${o}/orthofinder/Results_out/WorkingDirectory/OrthoFinder/Results_og ${o}/orthofinder_og
+if [[ -s ${o}/orthofinder_og/Orthogroups/Orthogroups.txt ]]
+then
+        echo "Using orthofinder to get Caudoviricetes orthologs - OK!"
+fi
+rm ${o}/orthofinder.temp1.log
+rm ${o}/orthofinder.temp2.log
+rm -R ${o}/prodigal
+rm -R ${o}/prodigal_check
+rm -R ${o}/orthofinder
+
+echo "Prepare Caudoviricetes profile HMMs ..."
+perl ${SRC}/my_sum_taxid.pl ${o}/orthofinder_og/Orthogroups/Orthogroups.txt
+perl ${SRC}/my_cp_og_cmd.pl ${o}/orthofinder_og/Orthogroups/Orthogroups.txt.sum 5 ${o}
+bash ${o}/og_filter.cmd
+for i in ${o}/og_filter/*.fa
+do
+	id=$i
+	id=${id##*/}
+	muscle -super5 ${i} -output ${i}.m.aln -threads ${t} >/dev/null 2>&1
+	perl ${SRC}/my_onelineonefa.pl ${i}.m.aln
+	perl ${SRC}/my_check_alnsites.pl ${i}.m.aln.oneline.fas
+	perl ${SRC}/my_check_alnseqgap.pl ${i}.m.aln.oneline.fas.check1.aln
+	hmmbuild -n ${id} ${i}.m.hmm ${i}.m.aln.oneline.fas.check1.aln.check2.aln >/dev/null 2>&1
+	perl ${SRC}/my_hmm_to_seq.pl ${i}.m.hmm
+done
+
+bash ${SRC}/my_blastp_nr_cmd.sh ${o}
+l=$(wc -l ${o}/blastp_nr_all.cmd | cut -f1 -d' ')
+m=$((l / ${t}))
+n=$((m + 1))
+split -l ${n} ${o}/blastp_nr_all.cmd ${o}/split
+ls ${o}/split* >${o}/list
+parallel -j${t} bash {} >/dev/null 2>&1 :::: ${o}/list
+rm ${o}/split* || true
+rm ${o}/list || true
+cat ${o}/og_filter/*.fa.m.hmm.fas.blastp_nr >${o}/all_blastp_nr
+perl ${SRC}/my_cp_hmm_cmd.pl ${o}/all_blastp_nr ${o}
+bash ${o}/hmm_filter.cmd
+cat ${o}/hmm_filter/*.hmm >${o}/Caudoviricetes_hmm.hmm
+if [[ -s ${o}/Caudoviricetes_hmm.hmm ]]
+then
+        echo "Prepare Caudoviricetes profile HMMs - OK!"
+fi
+rm ${o}/og_filter.cmd
+rm ${o}/hmm_filter.cmd
+rm ${o}/blastp_nr_all.cmd
+rm -R ${o}/orthofinder_og
+rm -R ${o}/representative
+
+echo "Prepare Caudoviricetes core nucleotide sequences ..."
+perl ${SRC}/my_cp_aa_cmd.pl ${o}/all_blastp_nr ${o}
+bash ${o}/cp_aa.cmd
+for i in ${o}/aln/*.aln
+do
+	perl ${SRC}/my_aa2nt.pl ${i}
+done
+cat ${o}/aln/*.fas >${o}/all_aa2nt.fas
+perl ${SRC}/my_removegap.pl ${o}/all_aa2nt.fas
+mv ${o}/all_aa2nt.fas.rg.fas ${o}/Caudoviricetes_aa2nt.fas
+if [[ -s ${o}/Caudoviricetes_aa2nt_removegap.fas ]]
+then 
+        echo "Prepare Caudoviricetes core nucleotide sequences - OK!" 
+fi
+rm ${o}/all_aa2nt.fas
+rm ${o}/cp_aa.cmd
+rm -R ${o}/aln
+
+echo "caudocog done!"
+
