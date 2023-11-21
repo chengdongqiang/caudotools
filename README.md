@@ -27,7 +27,7 @@ The GNU parallel was applied for multiple serial command line parallel running. 
 ### **Caudoscan Prerequisites**
 Caudoscan mainly implemented the fasta36 tool for DNA sequence similarity searching. The program fasta36 must be installed and made available in the system’s PATH. The FASTA programs was by W.R. Pearson and D.J. Lipman (1988), "Improved tools for biological sequence comparison", PNAS 85:2444-2448. https://doi.org/10.1073/pnas.85.8.2444
 
-The search database, Caudoviricetes_aa2nt.fas can be obtained from caudocog.
+The search database, Caudoviricetes_aa2nt.fas can be obtained from caudocog. Caudoviricetes_aa2nt.fas must be put into the "src" directroy.
 
 ### **Install**
 ```
