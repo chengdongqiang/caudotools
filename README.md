@@ -1,11 +1,11 @@
-## **Caudotools: identification of tailed phage Caudoviricetes viruses contigs from error-prone Nanopore long reads**
+## **Caudotools: Identification of Tailed Phage Caudoviricetes virus Contigs from Error-Prone Nanopore Long Reads**
 
 ### **Introduction**
-Tailed bacteriophages, also known as phages, are viruses that share a common ancestry and classified into the class Caudoviricetes. Long-read sequencing technology is greatly accelerating phage discoveries. The error-prone long reads often result in a high rate of open reading frame shifts, causing virtual protein translation failures. Previous phage identification software, which relies on protein Hidden Markov Model searches, will lose its effectiveness. To overcome this limitation, we present Caudotools which included two commands: caudocog and caudoscan.
+Tailed bacteriophages, also known as phages, are viruses that share a common ancestry and classified into the class Caudoviricetes. Long-read sequencing technology is greatly accelerating phage discoveries. The error-prone long reads often result in a high rate of open reading frame shifts, causing virtual protein translation failures. Previous phage identification software, which relies on protein Hidden Markov Model searches, will lose its effectiveness. To overcome this limitation, we introduce Caudotools, consisting of two commands: caudocog and caudoscan.
 
-Caudocog has been developed based on OrthoFinder and other software to create a comprehensive database of nucleotide sequences for core Caudoviricetes orthologous groups. The resulting output, Caudoviricetes_aa2nt.fas can serve as the search database for caudoscan.
+Caudocog is developed based on OrthoFinder and other softwares, creating a comprehensive nucleotide sequence database for core Caudoviricetes orthologous groups. The resulting output, Caudoviricetes_aa2nt.fas, serves as the search database for caudoscan.
 
-Caudoscan has been developed to identify phage contigs through nucleotide homologous searches and calculation of a window-based score following the Wilson score interval method. Caudoscan score of 0.3 served as a judgement threshold. If a contig had a caudoscan score greater than 0.3, it was categorized as a phage contig. Simulations using error-prone long reads of 40 kb and 20 kb showed that the F1 score for caudoscan reached 0.95 and 0.90, respectively.
+Caudoscan is designed to identify phage contigs through nucleotide homologous searches and calculation of a window-based score following the Wilson score interval method. A caudoscan score of 0.3 serves as a judgement threshold. Contigs with a caudoscan score greater than 0.3are categorized as phage contigs. Simulations using error-prone long reads of 40 kb and 20 kb showed that the F1 score for caudoscan reached 0.95 and 0.90, respectively.
 
 ### **Caudocog Prerequisites**
 The following software must be installed and added to the system’s PATH: prodigal, mash, orthofinder, hmmer, muscle, blastp (with the nr database available) and parallel. 
@@ -27,7 +27,7 @@ The GNU parallel was applied for multiple serial command line parallel running. 
 ### **Caudoscan Prerequisites**
 Caudoscan mainly implemented the fasta36 tool for DNA sequence similarity searching. The program fasta36 must be installed and made available in the system’s PATH. The FASTA programs was by W.R. Pearson and D.J. Lipman (1988), "Improved tools for biological sequence comparison", PNAS 85:2444-2448. https://doi.org/10.1073/pnas.85.8.2444
 
-The search database, Caudoviricetes_aa2nt.fas can be obtained from caudocog. Caudoviricetes_aa2nt.fas must be put into the "src" directroy.
+The search database, Caudoviricetes_aa2nt.fas, can be obtained from caudocog. Once obtained, it should be placed in the "src" directroy. In the "src" directory, we have already provided a Caudoviricetes_aa2nt.fas file. You can replace this file with the one generated from caudocog.
 
 ### **Install**
 ```
