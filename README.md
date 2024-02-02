@@ -65,7 +65,7 @@ Then run Caudoscan:
 ```
 nohup caudoscan -i test.fa -o test_output -t 50 >temp.temp 2>&1 &
 ```
-The sequences size is about 100KB. It took about 32s using 50 CPU cores.
+The sequences size is about 100KB. It took about 32 seconds to finish when using 50 CPU cores.
 
 The caudoscan result is located at test_output directory. The caudoscan score is writen in file ./caudotools/example/test_output/test.fa.caudoscan.txt.
 
