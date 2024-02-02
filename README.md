@@ -54,7 +54,7 @@ For 100MB sequenes, it will be taken about 15 hours to run caudoscan when using 
 nohup caudoscan -i input_contigs_fasta_format.fas -o output_diractory -t number_of_threads >temp.log 2>&1 &
 ```
 
-###**Example**
+### **Example**
 We provide an example here ./caudotools/example/test.fa
 First go to the test.fa contaning directory
 ```
