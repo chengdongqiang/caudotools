@@ -55,15 +55,18 @@ nohup caudoscan -i input_contigs_fasta_format.fas -o output_diractory -t number_
 ```
 
 ### **Example**
-We provide an example here ./caudotools/example/test.fa
-First go to the test.fa contaning directory
+We provide an example. The input FASTA sequences file is ./caudotools/example/test.fa
+
+Go to the test.fa file contaning directory:
 ```
 cd ./caudotools/example
 ```
-Then run Caudoscan
+Then run Caudoscan:
 ```
 nohup caudoscan -i test.fa -o test_output -t 50 >temp.temp 2>&1 &
 ```
-The caudoscan results will be in ./caudotools/example/test_output/test.fa.caudoscan.txt file.
+The caudoscan result is located at test_output output directory. The caudoscan score is in file ./caudotools/example/test_output/test.fa.caudoscan.txt
+
 If a sequence had a caudoscan score greater than 0.3, it was categorized as a phage sequence.
+
 
