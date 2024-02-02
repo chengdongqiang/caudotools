@@ -42,14 +42,14 @@ export PATH=$PATH:/caudotools/path
 source ~/.bash_profile
 ```
 ### **Caudocog Usage**
-It will be taken about 5 days to run caudocog when using 50 CPU cores.
+It will take about 5 days to run caudocog when using 50 CPU cores.
 ```
 nohup caudocog -o output_diractory -t number_of_threads >temp.log 2>&1 &
 ```
 
 
 ### **Caudoscan Usage**
-For 100MB sequenes, it will be taken about 15 hours to run caudoscan when using 50 CPU cores.
+For 100MB sequenes, it will take about 15 hours to run caudoscan when using 50 CPU cores.
 ```
 nohup caudoscan -i input_contigs_fasta_format.fas -o output_diractory -t number_of_threads >temp.log 2>&1 &
 ```
@@ -65,9 +65,9 @@ Then run Caudoscan:
 ```
 nohup caudoscan -i test.fa -o test_output -t 50 >temp.temp 2>&1 &
 ```
-The sequences size is about 100KB. It will be taken about 32s using 50 CPU cores.
+The sequences size is about 100KB. It took about 32s using 50 CPU cores.
 
-The caudoscan result is located at test_output output directory. The caudoscan score is in file ./caudotools/example/test_output/test.fa.caudoscan.txt
+The caudoscan result is located at test_output directory. The caudoscan score is writen in file ./caudotools/example/test_output/test.fa.caudoscan.txt.
 
 If a sequence had a caudoscan score greater than 0.3, it was categorized as a phage sequence.
 
