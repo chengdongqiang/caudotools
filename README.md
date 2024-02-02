@@ -65,6 +65,8 @@ Then run Caudoscan:
 ```
 nohup caudoscan -i test.fa -o test_output -t 50 >temp.temp 2>&1 &
 ```
+The sequences size is about 100KB. It will be taken about 32s using 50 CPU cores.
+
 The caudoscan result is located at test_output output directory. The caudoscan score is in file ./caudotools/example/test_output/test.fa.caudoscan.txt
 
 If a sequence had a caudoscan score greater than 0.3, it was categorized as a phage sequence.

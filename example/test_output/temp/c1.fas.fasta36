@@ -12,11 +12,11 @@ Library: /data3/cheng/caudoscan_nt_fasta36/src/Caudoviricetes_aa2nt.fas
 Statistics:  Expectation_n fit: rho(ln(x))= 5.8836+/-0.000513; mu= 55.0529+/- 0.035
  mean_var=43.4725+/-10.795, 0's: 0 Z-trim(92.2): 2663  B-trim: 0 in 0/32
  Lambda= 0.194521
- statistics sampled from 20605 (21421) to 20605 sequences
+ statistics sampled from 20609 (21421) to 20609 sequences
 Algorithm: FASTA (3.8 Nov 2011) [optimized]
 Parameters: +5/-4 matrix (5:-4), open/ext: -12/-4
  ktup: 6, E-join: 0.25 (0.0902), E-opt: 0.05 (0.0187), width:  16
- Scan time: 367.430
+ Scan time: 405.720
 
 The best scores are:                                      opt bits E(579864)
 NC_004586|198540|Viruses|Uroviricota|Caudoviri (1392) [f]  782 224.1 6.8e-55
@@ -86,8 +86,8 @@ NC_048672|2847822|Viruses|Uroviricota|Caudovir (1005) [f]  150 46.8    0.16
 NC_053008|2742114|Viruses|Uroviricota|Caudovir (1629) [f]  150 46.7    0.17
 NC_052987|2079340|Viruses|Uroviricota|Caudovir (1644) [f]  150 46.7    0.17
 NC_052989|2729575|Viruses|Uroviricota|Caudovir (1647) [f]  150 46.7    0.17
-NC_031228|1543203|Viruses|Uroviricota|Caudovir (1650) [f]  150 46.7    0.17
 NC_019524|1150990|Viruses|Uroviricota|Caudovir (1650) [f]  150 46.7    0.17
+NC_031228|1543203|Viruses|Uroviricota|Caudovir (1650) [f]  150 46.7    0.17
 NC_042119|2099444|Viruses|Uroviricota|Caudovir ( 603) [r]  149 46.7    0.18
 NC_017972|1161927|Viruses|Uroviricota|Caudovir ( 711) [r]  149 46.6    0.18
 NC_048068|2301604|Viruses|Uroviricota|Caudovir (2976) [f]  150 46.6    0.19
@@ -101,8 +101,8 @@ NC_052654|2144176|Viruses|Uroviricota|Caudovir ( 546) [f]  146 45.9    0.32
 NC_015284|445696|Viruses|Uroviricota|Caudoviri (2127) [r]  147 45.9    0.32
 NC_062744|2745643|Viruses|Uroviricota|Caudovir ( 624) [r]  146 45.8    0.32
 NC_048046|2283271|Viruses|Uroviricota|Caudovir ( 702) [r]  146 45.8    0.33
-NC_026923|1493509|Viruses|Uroviricota|Caudovir ( 780) [f]  146 45.8    0.33
 NC_062734|1493509|Viruses|Uroviricota|Caudovir ( 780) [f]  146 45.8    0.33
+NC_026923|1493509|Viruses|Uroviricota|Caudovir ( 780) [f]  146 45.8    0.33
 NC_049469|2599764|Viruses|Uroviricota|Caudovir (1554) [f]  146 45.6    0.37
 NC_007149|329886|Viruses|Uroviricota|Caudoviri (1578) [f]  146 45.6    0.37
 NC_047815|1958956|Viruses|Uroviricota|Caudovir ( 474) [f]  145 45.6    0.38
@@ -3932,28 +3932,6 @@ test_s ATCTTAAATACTTAAGGCTTTGAATGTTGTGCGCTATAACGTGGTTGAATATATTGCATG
 NC_052 GCGAGAAGTTTTTGATCAACGAGCTGAAGAAGAAGGTATAATACGAGAAAAAAAACTTAA
        1500      1510      1520      1530      1540      1550      
 
->>NC_031228|1543203|Viruses|Uroviricota|Caudoviricetes||  (1650 nt)
- initn: 140 init1: 140 opt: 150  Z-score: 158.9  bits: 46.7 E(579864): 0.17
-banded Smith-Waterman score: 150; 69.7% identity (69.7% similar) in 66 nt overlap (14961-15026:1413-1478)
-
-            14940     14950     14960     14970     14980     14990
-test_s AATCAGTGTTCATTATGAGCTTATTTCTCGTGCAAAAAAATAACCTGAACTTGTGAAAGT
-                                     :: ::::::: :: :::::  ::  : : :
-NC_031 ATGGATAGGTGCTTCACGAGGTCAAATAGATGAAAAAAAAGAAACTGAAGCTGCTATACT
-           1390      1400      1410      1420      1430      1440  
-
-            15000     15010     15020     15030     15040     15050
-test_s CCGCCTAAAATGGGGTCTTTAAACTTATCAGACCGAGTAGTCCGCTGATCTAGTGGGCAT
-        ::  :::::   ::::::: ::::::: :  : ::                        
-NC_031 TCGAATAAAAAATGGTCTTTCAACTTATGAAGCTGAAATAGCTCGACTTGGTGGTGATTT
-           1450      1460      1470      1480      1490      1500  
-
-            15060     15070     15080     15090     15100     15110
-test_s ATCTTAAATACTTAAGGCTTTGAATGTTGTGCGCTATAACGTGGTTGAATATATTGCATG
-                                                                   
-NC_031 TCGAGAAGTTTTTAAACAACGAGCTCGAGAAGAAGGTATAATAAAAGAACTTGGTCTTGA
-           1510      1520      1530      1540      1550      1560  
-
 >>NC_019524|1150990|Viruses|Uroviricota|Caudoviricetes||  (1650 nt)
  initn: 140 init1: 140 opt: 150  Z-score: 158.9  bits: 46.7 E(579864): 0.17
 banded Smith-Waterman score: 150; 69.7% identity (69.7% similar) in 66 nt overlap (14961-15026:1410-1475)
@@ -3975,6 +3953,28 @@ test_s ATCTTAAATACTTAAGGCTTTGAATGTTGTGCGCTATAACGTGGTTGAATATATTGCATG
                                                                    
 NC_019 TCGAGAAGTTTTTAAACAACGAGCTCGAGAAGAAGGTCTTATAAAATCACTTAAACTTGA
     1500      1510      1520      1530      1540      1550         
+
+>>NC_031228|1543203|Viruses|Uroviricota|Caudoviricetes||  (1650 nt)
+ initn: 140 init1: 140 opt: 150  Z-score: 158.9  bits: 46.7 E(579864): 0.17
+banded Smith-Waterman score: 150; 69.7% identity (69.7% similar) in 66 nt overlap (14961-15026:1413-1478)
+
+            14940     14950     14960     14970     14980     14990
+test_s AATCAGTGTTCATTATGAGCTTATTTCTCGTGCAAAAAAATAACCTGAACTTGTGAAAGT
+                                     :: ::::::: :: :::::  ::  : : :
+NC_031 ATGGATAGGTGCTTCACGAGGTCAAATAGATGAAAAAAAAGAAACTGAAGCTGCTATACT
+           1390      1400      1410      1420      1430      1440  
+
+            15000     15010     15020     15030     15040     15050
+test_s CCGCCTAAAATGGGGTCTTTAAACTTATCAGACCGAGTAGTCCGCTGATCTAGTGGGCAT
+        ::  :::::   ::::::: ::::::: :  : ::                        
+NC_031 TCGAATAAAAAATGGTCTTTCAACTTATGAAGCTGAAATAGCTCGACTTGGTGGTGATTT
+           1450      1460      1470      1480      1490      1500  
+
+            15060     15070     15080     15090     15100     15110
+test_s ATCTTAAATACTTAAGGCTTTGAATGTTGTGCGCTATAACGTGGTTGAATATATTGCATG
+                                                                   
+NC_031 TCGAGAAGTTTTTAAACAACGAGCTCGAGAAGAAGGTATAATAAAAGAACTTGGTCTTGA
+           1510      1520      1530      1540      1550      1560  
 
 >>NC_042119|2099444|Viruses|Uroviricota|Caudoviricetes||  (603 nt)
 rev-comp initn: 139 init1:  83 opt: 149  Z-score: 166.4  bits: 46.7 E(579864): 0.18
@@ -4277,34 +4277,6 @@ test_- CACTGGCGCTTTAAATGTGCTCTGAGGCCACACGTACATGGTTCGCGCCTAGCAAATGAT
 NC_048 GGTCCTGAAGTTTATAGTAGAGGTGTTGCTGGTGGTACTATCAGACATTGTACTATGGAA
            400       410       420       430       440       450   
 
->>NC_026923|1493509|Viruses|Uroviricota|Caudoviricetes||  (780 nt)
- initn: 102 init1: 102 opt: 146  Z-score: 159.5  bits: 45.8 E(579864): 0.33
-banded Smith-Waterman score: 146; 58.0% identity (58.0% similar) in 169 nt overlap (15141-15301:351-512)
-
-            15120     15130     15140     15150        15160       
-test_s CTTAGTTATTCTTAGGAATGGATCCGCCAAAACAAAACACGACGAT---ATGCAAGTACC
-                                     :: ::: :: :: :::    :  :: ::: 
-NC_026 TAATCTTGGATTTGAACTTTCAATAATATCAAAAAATCAAGAAGATGGACTTGAAATACT
-              330       340       350       360       370       380
-
-     15170     15180         15190     15200     15210     15220   
-test_s TTTGCTAGAACTTGC----TGTAACCCATCTTATAAGAGTATGCATAACCAGCGTAGACA
-       :   : :  ::::::    : : : ::::: :::::   ::: :  :  :  : :  :: 
-NC_026 TGAACAAATACTTGCATATTTTCAACCATCATATAA---TATACCAATGCGACTTGTAC-
-              390       400       410          420       430       
-
-         15230     15240     15250     15260     15270     15280   
-test_s AAACAAATTTTGATGAAACCGAGTATACTCCACTAGATCTTATTCCAGTAGCCAATTATG
-          :: :: ::::::::::  :  ::   ::: :::  :::: : ::::::   :: : :
-NC_026 ---CAGATCTTGATGAAACAAAAGATGTACCAGTAGTACTTAATTCAGTAGGATATGAAG
-           440       450       460       470       480       490   
-
-          15290     15300     15310     15320     15330     15340  
-test_s -GGACTGTGGAGGCGCCTTGGGACGATGGCCTAATTCGACGATAGATGGGTAAATGCGAG
-          : : :: ::: :  ::                                         
-NC_026 ATCAATATGAAGGAGATTTTTCATCACGACGAGCAATAATATATACACTTCAATTTACAG
-           500       510       520       530       540       550   
-
 >>NC_062734|1493509|Viruses|Uroviricota|Caudoviricetes||  (780 nt)
  initn: 102 init1: 102 opt: 146  Z-score: 159.5  bits: 45.8 E(579864): 0.33
 banded Smith-Waterman score: 146; 58.0% identity (58.0% similar) in 169 nt overlap (15141-15301:351-512)
@@ -4331,6 +4303,34 @@ NC_062 ---CAGATCTTGATGAAACAAAAGATGTACCAGTAGTACTTAATTCAGTAGGATATGAAG
 test_s -GGACTGTGGAGGCGCCTTGGGACGATGGCCTAATTCGACGATAGATGGGTAAATGCGAG
           : : :: ::: :  ::                                         
 NC_062 ATCAATATGAAGGAGATTTTTCATCACGACGAGCAATAATATATACACTTCAATTTACAG
+           500       510       520       530       540       550   
+
+>>NC_026923|1493509|Viruses|Uroviricota|Caudoviricetes||  (780 nt)
+ initn: 102 init1: 102 opt: 146  Z-score: 159.5  bits: 45.8 E(579864): 0.33
+banded Smith-Waterman score: 146; 58.0% identity (58.0% similar) in 169 nt overlap (15141-15301:351-512)
+
+            15120     15130     15140     15150        15160       
+test_s CTTAGTTATTCTTAGGAATGGATCCGCCAAAACAAAACACGACGAT---ATGCAAGTACC
+                                     :: ::: :: :: :::    :  :: ::: 
+NC_026 TAATCTTGGATTTGAACTTTCAATAATATCAAAAAATCAAGAAGATGGACTTGAAATACT
+              330       340       350       360       370       380
+
+     15170     15180         15190     15200     15210     15220   
+test_s TTTGCTAGAACTTGC----TGTAACCCATCTTATAAGAGTATGCATAACCAGCGTAGACA
+       :   : :  ::::::    : : : ::::: :::::   ::: :  :  :  : :  :: 
+NC_026 TGAACAAATACTTGCATATTTTCAACCATCATATAA---TATACCAATGCGACTTGTAC-
+              390       400       410          420       430       
+
+         15230     15240     15250     15260     15270     15280   
+test_s AAACAAATTTTGATGAAACCGAGTATACTCCACTAGATCTTATTCCAGTAGCCAATTATG
+          :: :: ::::::::::  :  ::   ::: :::  :::: : ::::::   :: : :
+NC_026 ---CAGATCTTGATGAAACAAAAGATGTACCAGTAGTACTTAATTCAGTAGGATATGAAG
+           440       450       460       470       480       490   
+
+          15290     15300     15310     15320     15330     15340  
+test_s -GGACTGTGGAGGCGCCTTGGGACGATGGCCTAATTCGACGATAGATGGGTAAATGCGAG
+          : : :: ::: :  ::                                         
+NC_026 ATCAATATGAAGGAGATTTTTCATCACGACGAGCAATAATATATACACTTCAATTTACAG
            500       510       520       530       540       550   
 
 >>NC_049469|2599764|Viruses|Uroviricota|Caudoviricetes||  (1554 nt)
@@ -6506,7 +6506,7 @@ NC_047 AGGTTG-TCAAATGC-TAATCTTTGATGGTAAACTACTAGCTTATAATGAACAATATATC
 34419 residues in 1 query   sequences
 586916568 residues in 579864 library sequences
  Tcomplib [36.3.8i Nov, 2022] (50 proc in memory [0G])
- start: Fri Feb  2 15:34:03 2024 done: Fri Feb  2 15:34:13 2024
- Total Scan time: 367.430 Total Display time:  0.450
+ start: Fri Feb  2 15:55:32 2024 done: Fri Feb  2 15:55:41 2024
+ Total Scan time: 405.720 Total Display time:  0.280
 
 Function used was FASTA [36.3.8i Nov, 2022]
