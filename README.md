@@ -49,7 +49,21 @@ nohup caudocog -o output_diractory -t number_of_threads >temp.log 2>&1 &
 
 
 ### **Caudoscan Usage**
+For 100MB sequenes, it will be taken about 15 hours to run caudoscan when using 50 CPU cores.
 ```
 nohup caudoscan -i input_contigs_fasta_format.fas -o output_diractory -t number_of_threads >temp.log 2>&1 &
 ```
+
+###**Example**
+We provide an example here ./caudotools/example/test.fa
+First go to the test.fa contaning directory
+```
+cd ./caudotools/example
+```
+Then run Caudoscan
+```
+nohup caudoscan -i test.fa -o test_output -t 50 >temp.temp 2>&1 &
+```
+The caudoscan results will be in ./caudotools/example/test_output/test.fa.caudoscan.txt file.
+If a sequence had a caudoscan score greater than 0.3, it was categorized as a phage sequence.
 
