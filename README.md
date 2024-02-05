@@ -22,7 +22,7 @@ The HMMER was used for searching the Caudoviricetes core HMMs against the contig
 
 The MUSCLES5 was used to align the cluster of orthologous groups. The MUSCLES5 by Edgar was cited here:  Muscle5: High-accuracy alignment ensembles enable unbiased assessments of sequence homology and phylogeny. Nat Commun, 13, 6968 (2022). https://doi.org/10.1038/s41467-022-34630-w
 
-The Blastp searches against the NR database were performed for each HMM consensus sequences to make sure the HMM is an effective core orthologous groups. The blastp by ALTSCHUL, et al. was cited here: Basic local alignment search tool. J Mol Biol, 215, 403-10 (1990). https://doi.org/10.1016/S0022-2836(05)80360-2
+The Blastp searches against the the NCBI non-redundant (nr) database (https://ftp.ncbi.nlm.nih.gov/blast/db/) were performed for each HMM consensus sequences to make sure the HMM is an effective core orthologous groups. The blastp by ALTSCHUL, et al. was cited here: Basic local alignment search tool. J Mol Biol, 215, 403-10 (1990). https://doi.org/10.1016/S0022-2836(05)80360-2
 
 The GNU parallel was applied for multiple serial command line parallel running. The GNU parallel by Ole Tange was cited here: Tange, O. (2021, August 22). GNU Parallel 20210822 ('Kabul'). Zenodo. https://doi.org/10.5281/zenodo.5233953.
 
@@ -71,4 +71,10 @@ The caudoscan result is located at test_output directory. The caudoscan score is
 
 If a sequence had a caudoscan score greater than 0.3, it was categorized as a phage sequence.
 
+### **Convert FASTQ or FASTA5 file to FASTA file**
+The below command line can be used to convert FASTQ file to FASTA file. 
+```
+sed -n '1~4s/^@/>/p;2~4p' INFILE.fastq > OUTFILE.fasta
+```
+FAST5 file can be converted into FASTQ file using poretools.(https://poretools.readthedocs.io/en/latest/).
 
