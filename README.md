@@ -72,9 +72,10 @@ The caudoscan result is located at test_output directory. The caudoscan score is
 If a sequence had a caudoscan score greater than 0.3, it was categorized as a phage sequence.
 
 ### **Convert FASTQ or FASTA5 file to FASTA file**
-The below command line can be used to convert FASTQ file to FASTA file. 
+To convert FASTQ file to FASTA file, you can use the following command line:
 ```
 sed -n '1~4s/^@/>/p;2~4p' INFILE.fastq > OUTFILE.fasta
 ```
-FAST5 file can be converted into FASTQ file using poretools.(https://poretools.readthedocs.io/en/latest/).
+For converting FAST5 file into FASTQ file, you can using poretools.(https://poretools.readthedocs.io/en/latest/).
+
 
