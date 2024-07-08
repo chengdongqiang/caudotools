@@ -42,7 +42,7 @@ You should see the output "Git LFS initialized.". Now, you can clone the Cautoto
 ```
 git clone https://github.com/chengdongqiang/caudotools.git
 ```
-The database ./caudotools/src/Caudoviricetes_aa2nt.fas is ~600MB.
+Make sure that the database ./caudotools/src/Caudoviricetes_aa2nt.fas is ~600MB.
 Add caudocog and caudoscan path to your environment variable $PATH. Edit file ~/.bash_profile and add one line at end of the file:
 
 export PATH=$PATH:/caudotools/path
