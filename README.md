@@ -46,7 +46,9 @@ Make sure that the database ./caudotools/src/Caudoviricetes_aa2nt.fas is ~600MB.
 Add caudocog and caudoscan path to your environment variable $PATH. Edit file ~/.bash_profile and add one line at end of the file:
 
 export PATH=$PATH:/caudotools/path
+
 Replacing `/caudotools/path` with the actual path to your Caudotools installation. For example:
+
 export PATH=$PATH:/home/x/caudotools
 ```
 source ~/.bash_profile
