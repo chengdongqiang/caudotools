@@ -25,9 +25,25 @@ if [ -z "${i}" ] || [ -z "${o}" ] || [ -z "${t}" ]; then
     usage
 fi
 
+for cmd in fasta36
+do
+	if ! command -v $cmd &> /dev/null
+	then
+		echo "Error. Command \`$cmd\` could not be found. Please install \`$cmd\` command."
+		exit 1
+	fi
+done
+
 SPATH="$(dirname "$(readlink -f "$0")")"
 SRC="$SPATH"/src
 o=${o%/}
+
+databaseactualsize=$(wc -c <"$SRC/Caudoviricetes_aa2nt.fas")
+if [ $databaseactualsize -lt 10000 ]
+then
+        echo "Error. The database ./caudotools/src/Caudoviricetes_aa2nt.fas is not downloaded correctly. Please install git-lfs then git clone the Caudotools."
+        exit 1
+fi
 
 if [[ -d ${o} ]]
 then
