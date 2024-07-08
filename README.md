@@ -32,12 +32,20 @@ Caudoscan mainly implemented the fasta36 tool for DNA sequence similarity search
 The search database, Caudoviricetes_aa2nt.fas, can be obtained from caudocog. Once obtained, it should be placed in the "src" directroy. In the "src" directory, we have already provided a Caudoviricetes_aa2nt.fas file. You can replace this file with the one generated from caudocog.
 
 ### **Install**
+Caudoscan contains a large database file in ./caudotools/src/Caudoviricetes_aa2nt.fas. Install git-lfs to download large file is required. First, download (https://github.com/git-lfs/git-lfs/releases) and put git-lfs execute binary into your PATH enviroment varibles. Then run
+```
+git lfs install
+```
+Output showed "Git LFS initialized.". After that, cautotools can use git clone with large files downloaded correctly.
 ```
 git clone https://github.com/chengdongqiang/caudotools.git
 ```
+The database ./caudotools/src/Caudoviricetes_aa2nt.fas is ~600MB.
 Add caudocog and caudoscan path to your environment variable $PATH. Edit file ~/.bash_profile and add one line at end of the file:
 
 export PATH=$PATH:/caudotools/path
+Such as your caudotools path is at /home/x/caudotools, then change as:
+export PATH=$PATH:/home/x/caudotools
 ```
 source ~/.bash_profile
 ```
