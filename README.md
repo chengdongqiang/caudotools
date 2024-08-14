@@ -1,7 +1,7 @@
 ## **Caudotools: Identification of Phage Sequences from Error-Prone Long Reads Using Wilson Scores**
 
 ### **Introduction**
-Tailed bacteriophages, also known as phages, belong to the class Caudoviricetes and share a common ancestry. The advent of long-read sequencing technology has significantly accelerated the discovery of phages. However, the error-prone nature of long reads often result in a high rate of open reading frame shifts, causing virtual protein translation failures. Previous phage identification software, which relies on protein Hidden Markov Model searches, may lose its effectiveness. To overcome this limitation, we introduce Caudotools, consisting of two commands: caudocog and caudoscan.
+Tailed bacteriophages, also known as phages, belong to the class Caudoviricetes and share a common ancestry.. The advent of long-read sequencing technology has significantly accelerated the discovery of phages. However, the error-prone nature of long reads often result in a high rate of open reading frame shifts, causing virtual protein translation failures. Previous phage identification software, which relies on protein Hidden Markov Model searches, may lose its effectiveness. To overcome this limitation, we introduce Caudotools, consisting of two commands: caudocog and caudoscan.
 
 Caudocog is developed based on OrthoFinder and other softwares, creating a comprehensive nucleotide sequence database for core Caudoviricetes orthologous groups. The resulting output, Caudoviricetes_aa2nt.fas, serves as the search database for caudoscan.
 
