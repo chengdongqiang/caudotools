@@ -90,4 +90,74 @@ sed -n '1~4s/^@/>/p;2~4p' INFILE.fastq > OUTFILE.fasta
 ```
 For converting FAST5 file into FASTQ file, you can using poretools.(https://poretools.readthedocs.io/en/latest/).
 
+### **Docker Usage**
+```
+docker pull ghcr.io/chengdongqiang/caudotools:latest
+```
 
+#### caudoscan example
+```
+docker run --rm -v "$(pwd)/caudoscan_output":/app/caudoscan_output ghcr.io/chengdongqiang/caudotools:latest ./caudoscan -i /app/example/test.fa -o /app/caudoscan_output -t 18
+```
+
+#### caudoscan use users fasta
+```
+docker run --rm -v "$(pwd)/test.fa":/app/test.fa -v "$(pwd)/caudoscan_output":/app/output ghcr.io/chengdongqiang/caudotools:latest ./caudoscan -i test.fa -o /app/caudoscan_output -t 18
+```
+
+#### caudocog produce users output reference Caudoviricetes_aa2nt.fas
+```
+docker run --rm -v "$(pwd)/caudocog_output":/app/caudocog_output -v "$(pwd)/nr":/blast/db -e BLASTDB=/blast/db ghcr.io/chengdongqiang/caudotools:latest ./caudocog -o caudocog_output -t 18
+```
+####caudoscan use new reference Caudoviricetes_aa2nt.fas and users fasta 
+```
+docker run --rm -v "$(pwd)/test.fa":/app/test.fa -v "$(pwd)/output":/app/output -v "$(pwd)/caudocog_output/Caudoviricetes_aa2nt.fas":/app/src/Caudoviricetes_aa2nt.fas ghcr.io/chengdongqiang/caudotools:latest ./caudoscan -i test.fa -o output -t 10
+```
+
+### **Singularity usage**
+```
+module load singularity
+```
+```
+singularity pull docker://ghcr.io/chengdongqiang/caudotools:latest
+```
+
+#### caudoscan example
+```
+mkdir caudoscan_output
+```
+```
+singularity exec --bind "$PWD/caudoscan_output":/app/caudoscan_output caudotools_latest.sif /app/caudoscan -i /app/example/test.fa -o /app/caudoscan_output -t 20
+```
+
+#### caudoscan use users fasta
+```
+mkdir caudoscan_output
+```
+```
+singularity exec --bind "$PWD/test.fa":/app/test.fa --bind "$PWD/caudoscan_output":/app/caudoscan_output caudotools_latest.sif /app/caudoscan -i /app/test.fa -o /app/caudoscan_output -t 20
+```
+
+#### caudocog produce users output reference Caudoviricetes_aa2nt.fas
+install taxonkit database
+```
+wget -c https://ftp.ncbi.nih.gov/pub/taxonomy/taxdump.tar.gz 
+tar -zxvf taxdump.tar.gz
+mkdir -p $HOME/.taxonkit
+cp names.dmp nodes.dmp delnodes.dmp merged.dmp $HOME/.taxonkit
+```
+download NCBI nr blast database to $PWD/nr
+```
+mkdir caudocog_output
+```
+```
+singularity exec --bind "$PWD/caudocog_output":/app/caudocog_output --bind "$PWD/nr":/blast/db --bind "$HOME/.taxonkit":/root/.taxonkit --env BLASTDB=/blast/db caudotools_latest.sif /app/caudocog -o caudocog_output -t 50
+```
+
+#### caudoscan use new reference Caudoviricetes_aa2nt.fas and users fasta 
+```
+mkdir caudoscan_output
+```
+```
+singularity exec --bind "$PWD/test.fa":/app/test.fa --bind "$PWD/caudoscan_output":/app/caudoscan_output --bind "$PWD/caudocog_output/Caudoviricetes_aa2nt.fas":/app/src/Caudoviricetes_aa2nt.fas caudotools_latest.sif /app/caudoscan -i /app/test.fa -o /app/caudoscan_output -t 50
+```
