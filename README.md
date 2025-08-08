@@ -110,7 +110,7 @@ docker run --rm \
 ```
 docker run --rm \
 	-v "$(pwd)/test.fa":/app/test.fa \
-	-v "$(pwd)/caudoscan_output":/app/output \
+	-v "$(pwd)/caudoscan_output":/app/caudoscan_output \
 	ghcr.io/chengdongqiang/caudotools:latest \
 	./caudoscan \
 	-i test.fa \
@@ -126,19 +126,19 @@ docker run --rm \
 	-e BLASTDB=/blast/db \
 	ghcr.io/chengdongqiang/caudotools:latest \
 	./caudocog \
-	-o caudocog_output \
+	-o /app/caudocog_output \
 	-t 50
 ```
 ### caudoscan use new reference Caudoviricetes_aa2nt.fas and users fasta 
 ```
 docker run --rm \
 	-v "$(pwd)/test.fa":/app/test.fa \
-	-v "$(pwd)/output":/app/output \
+	-v "$(pwd)/caudoscan_output":/app/caudoscan_output \
 	-v "$(pwd)/caudocog_output/Caudoviricetes_aa2nt.fas":/app/src/Caudoviricetes_aa2nt.fas \
 	ghcr.io/chengdongqiang/caudotools:latest \
 	./caudoscan \
 	-i test.fa \
-	-o output \
+	-o /app/caudoscan_output \
 	-t 20
 ```
 
@@ -197,7 +197,7 @@ singularity exec \
 	--env BLASTDB=/blast/db \
 	caudotools_latest.sif \
 	/app/caudocog \
-	-o caudocog_output \
+	-o /app/caudocog_output \
 	-t 50
 ```
 ### caudoscan use new reference Caudoviricetes_aa2nt.fas and users fasta 
