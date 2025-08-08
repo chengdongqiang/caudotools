@@ -98,48 +98,48 @@ docker pull ghcr.io/chengdongqiang/caudotools:latest
 ### caudoscan example
 ```
 docker run --rm \
-	-v "$(pwd)/caudoscan_output":/app/caudoscan_output \
-	ghcr.io/chengdongqiang/caudotools:latest \
-	./caudoscan \
-	-i /app/example/test.fa \
-	-o /app/caudoscan_output \
-	-t 20
+   -v "$(pwd)/caudoscan_output":/app/caudoscan_output \
+   ghcr.io/chengdongqiang/caudotools:latest \
+   ./caudoscan \
+   -i /app/example/test.fa \
+   -o /app/caudoscan_output \
+   -t 20
 ```
 
 ### caudoscan use users fasta
 ```
 docker run --rm \
-	-v "$(pwd)/test.fa":/app/test.fa \
-	-v "$(pwd)/caudoscan_output":/app/caudoscan_output \
-	ghcr.io/chengdongqiang/caudotools:latest \
-	./caudoscan \
-	-i test.fa \
-	-o /app/caudoscan_output \
-	-t 20
+   -v "$(pwd)/test.fa":/app/test.fa \
+   -v "$(pwd)/caudoscan_output":/app/caudoscan_output \
+   ghcr.io/chengdongqiang/caudotools:latest \
+   ./caudoscan \
+   -i test.fa \
+   -o /app/caudoscan_output \
+   -t 20
 ```
 
 ### caudocog produce users output reference Caudoviricetes_aa2nt.fas
 ```
 docker run --rm \
-	-v "$(pwd)/caudocog_output":/app/caudocog_output \
-	-v "$(pwd)/nr":/blast/db \
-	-e BLASTDB=/blast/db \
-	ghcr.io/chengdongqiang/caudotools:latest \
-	./caudocog \
-	-o /app/caudocog_output \
-	-t 50
+   -v "$(pwd)/caudocog_output":/app/caudocog_output \
+   -v "$(pwd)/nr":/blast/db \
+   -e BLASTDB=/blast/db \
+   ghcr.io/chengdongqiang/caudotools:latest \
+   ./caudocog \
+   -o /app/caudocog_output \
+   -t 50
 ```
 ### caudoscan use new reference Caudoviricetes_aa2nt.fas and users fasta 
 ```
 docker run --rm \
-	-v "$(pwd)/test.fa":/app/test.fa \
-	-v "$(pwd)/caudoscan_output":/app/caudoscan_output \
-	-v "$(pwd)/caudocog_output/Caudoviricetes_aa2nt.fas":/app/src/Caudoviricetes_aa2nt.fas \
-	ghcr.io/chengdongqiang/caudotools:latest \
-	./caudoscan \
-	-i test.fa \
-	-o /app/caudoscan_output \
-	-t 20
+   -v "$(pwd)/test.fa":/app/test.fa \
+   -v "$(pwd)/caudoscan_output":/app/caudoscan_output \
+   -v "$(pwd)/caudocog_output/Caudoviricetes_aa2nt.fas":/app/src/Caudoviricetes_aa2nt.fas \
+   ghcr.io/chengdongqiang/caudotools:latest \
+   ./caudoscan \
+   -i test.fa \
+   -o /app/caudoscan_output \
+   -t 20
 ```
 
 ## **Singularity usage**
@@ -154,12 +154,12 @@ mkdir caudoscan_output
 ```
 ```
 singularity exec \
-	--bind "$PWD/caudoscan_output":/app/caudoscan_output \
-	caudotools_latest.sif \
-	/app/caudoscan \
-	-i /app/example/test.fa \
-	-o /app/caudoscan_output \
-	-t 20
+   --bind "$PWD/caudoscan_output":/app/caudoscan_output \
+   caudotools_latest.sif \
+   /app/caudoscan \
+   -i /app/example/test.fa \
+   -o /app/caudoscan_output \
+   -t 20
 ```
 
 ### caudoscan use users fasta
@@ -168,13 +168,13 @@ mkdir caudoscan_output
 ```
 ```
 singularity exec \
-	--bind "$PWD/test.fa":/app/test.fa \
-	--bind "$PWD/caudoscan_output":/app/caudoscan_output \
-	caudotools_latest.sif \
-	/app/caudoscan \
-	-i /app/test.fa \
-	-o /app/caudoscan_output \
-	-t 20
+   --bind "$PWD/test.fa":/app/test.fa \
+   --bind "$PWD/caudoscan_output":/app/caudoscan_output \
+   caudotools_latest.sif \
+   /app/caudoscan \
+   -i /app/test.fa \
+   -o /app/caudoscan_output \
+   -t 20
 ```
 
 ### caudocog produce users output reference Caudoviricetes_aa2nt.fas
@@ -191,14 +191,14 @@ mkdir caudocog_output
 ```
 ```
 singularity exec \
-	--bind "$PWD/caudocog_output":/app/caudocog_output \
-	--bind "$PWD/nr":/blast/db \
-	--bind "$HOME/.taxonkit":/root/.taxonkit \
-	--env BLASTDB=/blast/db \
-	caudotools_latest.sif \
-	/app/caudocog \
-	-o /app/caudocog_output \
-	-t 50
+   --bind "$PWD/caudocog_output":/app/caudocog_output \
+   --bind "$PWD/nr":/blast/db \
+   --bind "$HOME/.taxonkit":/root/.taxonkit \
+   --env BLASTDB=/blast/db \
+   caudotools_latest.sif \
+   /app/caudocog \
+   -o /app/caudocog_output \
+   -t 50
 ```
 ### caudoscan use new reference Caudoviricetes_aa2nt.fas and users fasta 
 ```
@@ -206,12 +206,12 @@ mkdir caudoscan_output
 ```
 ```
 singularity exec \
-	--bind "$PWD/test.fa":/app/test.fa \
-	--bind "$PWD/caudoscan_output":/app/caudoscan_output \
-	--bind "$PWD/caudocog_output/Caudoviricetes_aa2nt.fas":/app/src/Caudoviricetes_aa2nt.fas \
-	caudotools_latest.sif \
-	/app/caudoscan \
-	-i /app/test.fa \
-	-o /app/caudoscan_output \
-	-t 20
+   --bind "$PWD/test.fa":/app/test.fa \
+   --bind "$PWD/caudoscan_output":/app/caudoscan_output \
+   --bind "$PWD/caudocog_output/Caudoviricetes_aa2nt.fas":/app/src/Caudoviricetes_aa2nt.fas \
+   caudotools_latest.sif \
+   /app/caudoscan \
+   -i /app/test.fa \
+   -o /app/caudoscan_output \
+   -t 20
 ```
