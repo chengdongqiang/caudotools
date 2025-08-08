@@ -103,7 +103,7 @@ docker run --rm \
 	./caudoscan \
 	-i /app/example/test.fa \
 	-o /app/caudoscan_output \
-	-t 18
+	-t 20
 ```
 
 ### caudoscan use users fasta
@@ -115,7 +115,7 @@ docker run --rm \
 	./caudoscan \
 	-i test.fa \
 	-o /app/caudoscan_output \
-	-t 18
+	-t 20
 ```
 
 ### caudocog produce users output reference Caudoviricetes_aa2nt.fas
@@ -127,7 +127,7 @@ docker run --rm \
 	ghcr.io/chengdongqiang/caudotools:latest \
 	./caudocog \
 	-o caudocog_output \
-	-t 18
+	-t 50
 ```
 ### caudoscan use new reference Caudoviricetes_aa2nt.fas and users fasta 
 ```
@@ -139,7 +139,7 @@ docker run --rm \
 	./caudoscan \
 	-i test.fa \
 	-o output \
-	-t 10
+	-t 20
 ```
 
 ## **Singularity usage**
@@ -213,5 +213,5 @@ singularity exec \
 	/app/caudoscan \
 	-i /app/test.fa \
 	-o /app/caudoscan_output \
-	-t 50
+	-t 20
 ```
