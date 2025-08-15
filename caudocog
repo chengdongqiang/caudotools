@@ -136,11 +136,12 @@ do
 		cp ${o}/prodigal/$i.oneline.fas.filter150_2000.fasta ${o}/prodigal_check/$i.ok.fasta
 	fi
 done
-orthofinder -S diamond_ultra_sens -f ${o}/prodigal_check -t ${t} -o ${o}/orthofinder -n out -og --fewer-files >${o}/orthofinder.temp1.log &
-pid=$!
-st=$((480/${t}))
-sleep ${st}h
-kill -9 $pid
+orthofinder -S diamond_ultra_sens -f ${o}/prodigal_check -t ${t} -o ${o}/orthofinder -n out -og --fewer-files >${o}/orthofinder.temp1.log
+#orthofinder -S diamond_ultra_sens -f ${o}/prodigal_check -t ${t} -o ${o}/orthofinder -n out -og --fewer-files >${o}/orthofinder.temp1.log &
+#pid=$!
+#st=$((480/${t}))
+#sleep ${st}h
+#kill -9 $pid
 orthofinder -S diamond_ultra_sens -t ${t} -b ${o}/orthofinder/Results_out/WorkingDirectory -n og -os -M msa --fewer-files >${o}/orthofinder.temp2.log
 cp -R ${o}/orthofinder/Results_out/WorkingDirectory/OrthoFinder/Results_og ${o}/orthofinder_og
 if [[ -s ${o}/orthofinder_og/Orthogroups/Orthogroups.txt ]]

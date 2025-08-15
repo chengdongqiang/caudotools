@@ -162,7 +162,7 @@ singularity exec \
    -t 20
 ```
 
-### caudoscan use users fasta
+### caudoscan with a user-provided fasta file
 ```
 mkdir caudoscan_output
 ```
@@ -177,7 +177,7 @@ singularity exec \
    -t 20
 ```
 
-### caudocog produce users output reference Caudoviricetes_aa2nt.fas
+### caudocog to produce an output reference Caudoviricetes_aa2nt.fas
 install taxonkit database
 ```
 wget -c https://ftp.ncbi.nih.gov/pub/taxonomy/taxdump.tar.gz 
@@ -200,7 +200,7 @@ singularity exec \
    -o /app/caudocog_output \
    -t 50
 ```
-### caudoscan use new reference Caudoviricetes_aa2nt.fas and users fasta 
+### caudoscan with the new reference Caudoviricetes_aa2nt.fas and a user-provided fasta 
 ```
 mkdir caudoscan_output
 ```
