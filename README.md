@@ -106,7 +106,7 @@ docker run --rm \
    -t 20
 ```
 
-### caudoscan use users fasta
+### caudoscan with a user-provided fasta file
 ```
 docker run --rm \
    -v "$(pwd)/test.fa":/app/test.fa \
@@ -118,7 +118,7 @@ docker run --rm \
    -t 20
 ```
 
-### caudocog produce users output reference Caudoviricetes_aa2nt.fas
+### caudocog to produce an output reference Caudoviricetes_aa2nt.fas
 ```
 docker run --rm \
    -v "$(pwd)/caudocog_output":/app/caudocog_output \
@@ -129,7 +129,7 @@ docker run --rm \
    -o /app/caudocog_output \
    -t 50
 ```
-### caudoscan use new reference Caudoviricetes_aa2nt.fas and users fasta 
+### caudoscan with the new reference Caudoviricetes_aa2nt.fas and a user-provided fasta 
 ```
 docker run --rm \
    -v "$(pwd)/test.fa":/app/test.fa \
